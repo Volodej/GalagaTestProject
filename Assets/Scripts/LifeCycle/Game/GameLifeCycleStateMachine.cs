@@ -4,7 +4,8 @@ namespace LifeCycle.Game
 {
     public class GameLifeCycleStateMachine : WaitingStateMachine<GameStateType, GameContext>
     {
-        public GameLifeCycleStateMachine(GameContext gameContext)
+        public GameLifeCycleStateMachine(GameLifeCycleTransitionManager transitionManager, GameContext gameContext)
+            : base(transitionManager, gameContext)
         {
             
         }

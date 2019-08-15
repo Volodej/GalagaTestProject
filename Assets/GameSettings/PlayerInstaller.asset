@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762e55cd8b17b453aaae1e9028ffe948, type: 3}
   m_Name: PlayerInstaller
   m_EditorClassIdentifier: 
+  _playerPrefab: {fileID: 4963860436858813419, guid: 5f1ca144e800b46db915d7520aa6ab57,
+    type: 3}
+  _playerExplosion: {fileID: 7947114423504919918, guid: 70eca16dab2af47a9a75d786aaf560b1,
+    type: 3}
+  _playerProjectile: {fileID: 853717207298184421, guid: 3c87f8732c32c451683dbb3708d2346f,
+    type: 3}
+  _enableKeyboardInputInEditor: 1

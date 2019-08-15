@@ -11,11 +11,11 @@ namespace Utils
         private readonly Action<T> _resetFunc;
         private readonly Transform _orphansRoot;
 
-        public ObjectsPool(Func<T> createFunc, Action<T> resetFunc, string orphansRootName)
+        public ObjectsPool(Func<T> createFunc, Action<T> resetFunc)
         {
             _createFunc = createFunc;
             _resetFunc = resetFunc;
-            var orphansGameObject = new GameObject(orphansRootName) {name = orphansRootName};
+            var orphansGameObject = GameObject.Find("OrphansRoot") ?? new GameObject("OrphansRoot");
             orphansGameObject.SetActive(false);
             _orphansRoot = orphansGameObject.transform;
         }

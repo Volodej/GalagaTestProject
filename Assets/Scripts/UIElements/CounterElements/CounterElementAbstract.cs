@@ -19,13 +19,11 @@ namespace UIElements.CounterElements
             _container = GetComponent<RectTransform>();
             _itemPrefab.gameObject.SetActive(false);
             _itemsPool = new ObjectsPool<Image>(() =>
-                {
-                    var item = Instantiate(_itemPrefab);
-                    item.gameObject.SetActive(true);
-                    return item;
-                },
-                _ => { },
-                "CounterItems");
+            {
+                var item = Instantiate(_itemPrefab);
+                item.gameObject.SetActive(true);
+                return item;
+            }, _ => { });
         }
 
         public void SetCount(int count)
