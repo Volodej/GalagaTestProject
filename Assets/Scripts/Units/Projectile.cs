@@ -1,4 +1,5 @@
 using System;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -14,30 +15,30 @@ namespace Units
         [SerializeField] private LayerMask _targetLayer;
         [SerializeField] private float _lifeTime = 5;
         [SerializeField] private Vector2 _velocity;
-        private float _startTime;
 
-        public void Setup(Vector2 velocity, Vector2 position)
+        private void Setup(Vector2 velocity, Vector2 position)
         {
             _velocity = velocity;
-            _startTime = Time.time;
-            _rigidbody.rotation = Vector2.SignedAngle(_velocity, Vector2.up);
+            _rigidbody.rotation = Vector2.SignedAngle(Vector2.up, _velocity);
             _rigidbody.position = position;
+            
+            Observable.Timer(TimeSpan.FromSeconds(_lifeTime))
+                .Subscribe(_ => Destroyed(this));
+            
+            gameObject.SetActive(true);
         }
 
         private void Update()
         {
-            if (!(Time.time - _startTime < _lifeTime))
-            {
-                Destroy();
-                return;
-            }
-
             var newPosition = _rigidbody.position + _velocity * Time.deltaTime;
-            _rigidbody.MovePosition(newPosition);
+            _rigidbody.position = newPosition;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
+            if (!gameObject.activeInHierarchy)
+                return;
+            
             var isCorrectLayer = (_targetLayer.value & (1 << other.gameObject.layer)) != 0;
             if (!isCorrectLayer)
                 return;
@@ -70,6 +71,7 @@ namespace Units
             {
                 projectile.Destroyed += ReturnToPool;
                 base.OnSpawned(projectile);
+                projectile._rigidbody.position = new Vector2(1000, 0);
             }
 
             protected override void OnDespawned(Projectile projectile)

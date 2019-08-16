@@ -3,6 +3,7 @@ namespace TopPlayers
     public class TopPlayersStorage
     {
         public int LowestScore { get; set; }
+        public int HighestScore { get; set; }
 
         /// <summary>
         /// Add player's score to global rating

@@ -27,7 +27,7 @@ namespace Installers
             
             Container.BindMemoryPool<Projectile, Projectile.Pool>()
                 .WithId(Identifiers.PlayerProjectile)
-                .WithInitialSize(2)
+                .WithInitialSize(5)
                 .FromComponentInNewPrefab(_playerProjectile)
                 .UnderTransformGroup("Projectiles");
         }

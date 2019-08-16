@@ -12,3 +12,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe91a2e6f3424445d999f73b05e7474d, type: 3}
   m_Name: EnemiesInstaller
   m_EditorClassIdentifier: 
+  _formationSettings:
+    AllowedFormationBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 250, y: 100, z: 0}
+    UnitSize: 20
+    MinUnitsDistance: 10
+    MaxUnitsDistance: 30
+    SqueezeExpandCycleTime: 10
+  _beeEnemy:
+    Speed: 100
+    RotationSpeed: 120
+    Prefab: {fileID: 5396291161611513501, guid: 61e9cfcd51aa1470195ff83738688f66,
+      type: 3}
+    AttackCommandQueues:
+    - {fileID: 11400000, guid: 0fe331a21c6f2449b9fdfbcbc6571573, type: 2}
+    ShotsInBurst: 1
+    BurstDelay: 10
+    ShotsDelay: 2
+    ProjectileSpeed: 150
+    PointsForEnemy: 200
+  _bossEnemy:
+    Speed: 120
+    RotationSpeed: 100
+    Prefab: {fileID: 1382157333341367565, guid: 826efbe7c9fa042b8b9aca8c35644f8b,
+      type: 3}
+    AttackCommandQueues:
+    - {fileID: 11400000, guid: 0fe331a21c6f2449b9fdfbcbc6571573, type: 2}
+    ShotsInBurst: 2
+    BurstDelay: 10
+    ShotsDelay: 2
+    ProjectileSpeed: 180
+    PointsForEnemy: 400
+  _mothEnemy:
+    Speed: 130
+    RotationSpeed: 90
+    Prefab: {fileID: 5169365434227989487, guid: 63ae539aeb9c446548fa868d17222314,
+      type: 3}
+    AttackCommandQueues:
+    - {fileID: 11400000, guid: 0fe331a21c6f2449b9fdfbcbc6571573, type: 2}
+    ShotsInBurst: 1
+    BurstDelay: 7
+    ShotsDelay: 2
+    ProjectileSpeed: 150
+    PointsForEnemy: 200
+  _enemyProjectilePrefab: {fileID: 2064489162107552462, guid: 73d5582ffcd8e4b1a81f89d399f4e55c,
+    type: 3}
+  _enemyExplosionPrefab: {fileID: 4640167543113730405, guid: d56d651ea191249ce9f05193b61478dd,
+    type: 3}

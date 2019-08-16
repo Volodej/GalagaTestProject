@@ -22,7 +22,7 @@ namespace LifeCycle.Level
             
             AddState(waitingState)
                 .AllowTransition(levelEndState, context => context.LevelEndAchieved)
-                .AllowTransition(incomingWaveState, context => context.WaysToIncomeCount>0)
+                .AllowTransition(incomingWaveState, context => context.HasWavesToIncome)
                 .AllowTransition(divingWaveState, context => true)
                 .Build();
         }

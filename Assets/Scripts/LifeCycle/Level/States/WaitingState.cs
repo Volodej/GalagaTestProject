@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using LifeCycle.Game;
 using StateMachines;
 using Units;
+using Units.Formation;
 using UnityEngine;
 
 namespace LifeCycle.Level.States
@@ -11,12 +13,14 @@ namespace LifeCycle.Level.States
         private readonly GameContext _gameContext;
         private readonly LevelContext _levelContext;
         private readonly PlayerShip _playerShip;
+        private readonly ShipsFormation _shipsFormation;
 
-        public WaitingState(GameContext gameContext, LevelContext levelContext, PlayerShip playerShip)
+        public WaitingState(GameContext gameContext, LevelContext levelContext, PlayerShip playerShip, ShipsFormation shipsFormation)
         {
             _gameContext = gameContext;
             _levelContext = levelContext;
             _playerShip = playerShip;
+            _shipsFormation = shipsFormation;
         }
         
         public async Task RunState()
@@ -35,7 +39,8 @@ namespace LifeCycle.Level.States
                 }
             }
 
-            await Task.Delay(Mathf.RoundToInt(_levelContext.TimeToWait * 1000));
+            if (!_levelContext.LevelEndAchieved)
+                await Task.Delay(TimeSpan.FromSeconds(_levelContext.TimeToWait));
         }
 
         public LevelStateType Type => LevelStateType.Waiting;

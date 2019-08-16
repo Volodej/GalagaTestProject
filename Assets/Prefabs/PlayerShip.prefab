@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4963860436858813419}
   - component: {fileID: 5351033540867753706}
   - component: {fileID: -1143115376312469314}
-  m_Layer: 0
+  - component: {fileID: -8429776121308017603}
+  m_Layer: 8
   m_Name: PlayerShip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startPosition: {x: 0, y: -110}
   _maxPositionExtend: 250
-  _movementSpeed: 100
+  _movementSpeed: 130
   _shootingCooldown: 0.5
   _playerRocketSpeed: 200
 --- !u!50 &5351033540867753706
@@ -148,3 +149,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 15, y: 16}
   m_EdgeRadius: 0
+--- !u!114 &-8429776121308017603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963860436858813418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55040627418b4ec593528706cd7a04f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

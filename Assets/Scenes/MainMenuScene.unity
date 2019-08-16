@@ -347,6 +347,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8d9f3c234d4b588e0681c7812ec775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemiesLines:
+  - EnemyType: 1
+    EnemiesInLine: 1
+    MovementCommandsQueue: {fileID: 11400000, guid: 0a91cc1d15a304fbc9f2c0f9f5e4b3ad,
+      type: 2}
+    TimeToSpawn: 4
+  - EnemyType: 2
+    EnemiesInLine: 7
+    MovementCommandsQueue: {fileID: 11400000, guid: 0a91cc1d15a304fbc9f2c0f9f5e4b3ad,
+      type: 2}
+    TimeToSpawn: 4
+  - EnemyType: 0
+    EnemiesInLine: 6
+    MovementCommandsQueue: {fileID: 11400000, guid: 0a91cc1d15a304fbc9f2c0f9f5e4b3ad,
+      type: 2}
+    TimeToSpawn: 4
+  HorizontalMovementTime: 60
+  VerticalMovementTime: 300
+  SpeedMultiplier: 1
+  FireRateMultiplier: 1
+  ShotsNumberMultiplier: 1
+  ShipsInAttackWave: 3
+  AttackWaveDelayTime: 3
+  TimeBetweenWaves: 5
 --- !u!114 &1850367290
 MonoBehaviour:
   m_ObjectHideFlags: 0

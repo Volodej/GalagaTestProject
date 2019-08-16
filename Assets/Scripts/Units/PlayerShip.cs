@@ -29,7 +29,8 @@ namespace Units
         private Projectile.Pool _projectilesPool;
 
         [Inject]
-        public void Init(IUserInput userInput, Explosion playerExplosion, [Inject(Id = Identifiers.PlayerProjectile)]
+        public void Initialize(IUserInput userInput, Explosion playerExplosion,
+            [Inject(Id = Identifiers.PlayerProjectile)]
             Projectile.Pool projectilesPool)
         {
             _userInput = userInput;

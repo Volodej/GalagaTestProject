@@ -1,14 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace Units
 {
     public class Damageable : MonoBehaviour
     {
-        [SerializeField] private int _hitPoints;
+        public event Action GotHit = () => { };
 
         public void Hit()
         {
-            
+            GotHit();
         }
     }
 }

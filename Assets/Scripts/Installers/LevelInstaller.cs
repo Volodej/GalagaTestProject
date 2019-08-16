@@ -1,5 +1,6 @@
 using LifeCycle.Level;
 using LifeCycle.Level.States;
+using Units.Formation;
 using UnityEngine;
 using Zenject;
 
@@ -24,6 +25,10 @@ namespace Installers
             Container.Bind<IntroState>().AsSingle();
             Container.Bind<LevelEndState>().AsSingle();
             Container.Bind<WaitingState>().AsSingle();
+            
+            // Formation
+            Container.Bind<ShipsFormation>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<EnemiesSpawner>().AsSingle();
         }
     }
 }
