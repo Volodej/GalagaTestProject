@@ -12,7 +12,9 @@ namespace TopPlayers
 
         private readonly SortedList<int, TopPlayerData> _topPlayers;
 
-        public int LowestScore => Math.Max(_topPlayers.Take(10).LastOrDefault().Key, MINIMAL_SCORE);
+        public int LowestScore => _topPlayers.Count >= 10
+            ? Math.Max(_topPlayers.Take(10).LastOrDefault().Key, MINIMAL_SCORE)
+            : MINIMAL_SCORE;
         public int HighestScore => Math.Max(_topPlayers.FirstOrDefault().Key, MINIMAL_SCORE);
         public List<TopPlayerData> Top10Players => _topPlayers.Select(pair => pair.Value).Take(10).ToList();
 

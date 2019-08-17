@@ -17,7 +17,7 @@ namespace Installers
         {
             Container.Bind<PlayerShip>().FromComponentInNewPrefab(_playerPrefab).AsSingle();
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBGL
             if (_enableKeyboardInputInEditor)
                 Container.Bind<IUserInput>().To<KeyboardInput>().FromNewComponentOnNewGameObject().AsSingle();
             else

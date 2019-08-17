@@ -81,7 +81,7 @@ public class SceneReference : ISerializationCallbackReceiver
             return sceneAsset.name;
         }
 #else
-		return Path.GetFileNameWithoutExtension(scenePath);
+        return scenePath.Split('\\', '/').Last().Split('.').First();
 #endif
     }
 
