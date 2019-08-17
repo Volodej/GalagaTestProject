@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using LifeCycle.Game;
 using StateMachines;
+using UIElements;
 using Units;
 using Units.Formation;
 using UnityEngine;
@@ -14,15 +15,18 @@ namespace LifeCycle.Level.States
         private readonly LevelContext _levelContext;
         private readonly PlayerShip _playerShip;
         private readonly ShipsFormation _shipsFormation;
+        private readonly HudPanel _hudPanel;
 
-        public WaitingState(GameContext gameContext, LevelContext levelContext, PlayerShip playerShip, ShipsFormation shipsFormation)
+        public WaitingState(GameContext gameContext, LevelContext levelContext, PlayerShip playerShip, ShipsFormation shipsFormation,
+            HudPanel hudPanel)
         {
             _gameContext = gameContext;
             _levelContext = levelContext;
             _playerShip = playerShip;
             _shipsFormation = shipsFormation;
+            _hudPanel = hudPanel;
         }
-        
+
         public async Task RunState()
         {
             if (!_gameContext.IsPlayerAlive)
@@ -36,6 +40,7 @@ namespace LifeCycle.Level.States
                 {
                     _playerShip.PlaceShipOnScene();
                     _gameContext.TakeOneLife();
+                    _hudPanel.SetPlayerLivesCount(_gameContext.PlayerLives);
                 }
             }
 

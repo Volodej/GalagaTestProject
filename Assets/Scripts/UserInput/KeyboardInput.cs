@@ -7,6 +7,8 @@ namespace UserInput
     {
         public event Action Fired = () => { };
         public event Action<float> Moved = _ => { };
+        public void Enable() => enabled = true;
+        public void Disable() => enabled = false;
 
         private void Update()
         {

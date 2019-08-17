@@ -31,7 +31,6 @@ namespace Units.Movement
 
             foreach (var movementAction in movementCommandsQueue.Actions)
             {
-                Debug.Log($"DoMovement: {movementAction.Type} || {enabled} - {gameObject.activeInHierarchy}");
                 if (enabled && gameObject.activeInHierarchy)
                     await DoAction(movementAction);
             }
@@ -74,6 +73,8 @@ namespace Units.Movement
                     return new MoveToFormationStrategy(_rigidbody, _formationCell, _speed, _rotationSpeed);
                 case MovementType.JoinFormation:
                     return new JoinFormationStrategy(_rigidbody, _formationCell);
+                case MovementType.GoOffscreen:
+                    return new MoveOffscreenStrategy(_rigidbody, _speed, _rotationSpeed);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7947114423504919915}
   - component: {fileID: 7947114423504919912}
-  - component: {fileID: 7947114423504919913}
   - component: {fileID: 7947114423504919918}
   - component: {fileID: 5012588427211455427}
+  - component: {fileID: -3423701696205635059}
   m_Layer: 0
   m_Name: PlayerExplosion
   m_TagString: Untagged
@@ -84,21 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &7947114423504919913
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7947114423504919919}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 9f1ccce3cdca441369a9bc134c931a9a, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &7947114423504919918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,9 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0d99be80c243d58973790cdf34f809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animation: {fileID: 7947114423504919913}
-  _animationClip: {fileID: 7400000, guid: 9f1ccce3cdca441369a9bc134c931a9a, type: 2}
+  _animator: {fileID: -3423701696205635059}
   _audioSource: {fileID: 5012588427211455427}
+  _animationTime: 0.917
+  _stateName: ' Explosion_Player'
 --- !u!82 &5012588427211455427
 AudioSource:
   m_ObjectHideFlags: 0
@@ -124,7 +110,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7b29a685aa1d54c7aa007ebb3e1e3a82, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 25c7bd08a50d641c48405577fdf45531, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -210,3 +196,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &-3423701696205635059
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947114423504919919}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 035c87f1762064269a72666428d6d372, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

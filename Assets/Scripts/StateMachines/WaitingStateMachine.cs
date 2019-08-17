@@ -22,7 +22,6 @@ namespace StateMachines
             await _currentState.RunState();
             do
             {
-                Debug.Log($"Finished State '{_currentState.Type}' in {GetType().Name}");
                 _currentState = _transitionManager.GetNextState(_currentState, _context);
                 await _currentState.RunState();
             } while (!_currentState.IsExitState);

@@ -4,7 +4,7 @@ namespace Units.Movement
 {
     public class JoinFormationStrategy : MovementActionStrategy
     {
-        private const float TIME_TO_JOIN = 1;
+        private const float TIME_TO_JOIN = 0.6f;
 
         private readonly Transform _cell;
         private readonly float _startTime;

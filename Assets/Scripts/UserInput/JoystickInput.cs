@@ -17,6 +17,10 @@ namespace UserInput
             remove => _controlsPanel.Moved -= value;
         }
 
+        public void Enable() => _controlsPanel.gameObject.SetActive(true);
+
+        public void Disable() => _controlsPanel.gameObject.SetActive(false);
+
         private readonly ControlsPanel _controlsPanel;
 
         public JoystickInput(ControlsPanel controlsPanel)

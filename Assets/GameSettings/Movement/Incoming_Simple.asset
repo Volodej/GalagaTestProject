@@ -16,9 +16,9 @@ MonoBehaviour:
   - Type: 0
     Point: {x: 450, y: -80}
   - Type: 1
-    Point: {x: -190, y: -60}
+    Point: {x: -190, y: -10}
   - Type: 1
-    Point: {x: 0, y: -20}
+    Point: {x: 0, y: -10}
   - Type: 3
     Point: {x: 0, y: 0}
   - Type: 4

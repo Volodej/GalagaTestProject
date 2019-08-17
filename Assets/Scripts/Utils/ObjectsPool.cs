@@ -1,23 +1,24 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Utils
 {
     public class ObjectsPool<T> where T : Component
     {
+        private static bool _isOrphansRootCreated;
+        private static Transform _orphansRoot;
+        private static Transform OrphansRoot => _isOrphansRootCreated ? _orphansRoot : (_orphansRoot = CreateOrphansRoot());
+        
         private readonly Stack<T> _objects = new Stack<T>();
         private readonly Func<T> _createFunc;
         private readonly Action<T> _resetFunc;
-        private readonly Transform _orphansRoot;
 
         public ObjectsPool(Func<T> createFunc, Action<T> resetFunc)
         {
             _createFunc = createFunc;
             _resetFunc = resetFunc;
-            var orphansGameObject = GameObject.Find("OrphansRoot") ?? new GameObject("OrphansRoot");
-            orphansGameObject.SetActive(false);
-            _orphansRoot = orphansGameObject.transform;
         }
 
         public T Borrow()
@@ -29,7 +30,15 @@ namespace Utils
         {
             _resetFunc(value);
             _objects.Push(value);
-            value.transform.SetParent(_orphansRoot);
+            value.transform.SetParent(OrphansRoot);
+        }
+
+        private static Transform CreateOrphansRoot()
+        {
+            var orphansGameObject = new GameObject("OrphansRoot");
+            orphansGameObject.SetActive(false);
+            Object.DontDestroyOnLoad(orphansGameObject);
+            return orphansGameObject.transform;
         }
     }
 }

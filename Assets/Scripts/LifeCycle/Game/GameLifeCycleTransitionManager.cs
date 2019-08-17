@@ -23,7 +23,7 @@ namespace LifeCycle.Game
                 .Build();
             
             AddState(topPlayersState)
-                .AllowTransition(levelState, _ => true)
+                .AllowTransition(levelSelectionState, _ => true)
                 .Build();
         }
     }

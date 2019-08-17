@@ -23,6 +23,7 @@ namespace Units
             _rigidbody.position = position;
             
             Observable.Timer(TimeSpan.FromSeconds(_lifeTime))
+                .TakeUntilDisable(this)
                 .Subscribe(_ => Destroyed(this));
             
             gameObject.SetActive(true);
@@ -70,12 +71,13 @@ namespace Units
             protected override void OnSpawned(Projectile projectile)
             {
                 projectile.Destroyed += ReturnToPool;
+                projectile.transform.position = new Vector2(1000, 0);
                 base.OnSpawned(projectile);
-                projectile._rigidbody.position = new Vector2(1000, 0);
             }
 
             protected override void OnDespawned(Projectile projectile)
             {
+                projectile.transform.position = new Vector2(1000, 0);
                 projectile.Destroyed -= ReturnToPool;
                 base.OnDespawned(projectile);
             }

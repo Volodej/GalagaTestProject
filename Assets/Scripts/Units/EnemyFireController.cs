@@ -25,13 +25,29 @@ namespace Units
             _shotsDelay = shotsDelay;
             _projectileSpeed = projectileSpeed;
                 
-            _timeToNextShot = burstDelay + Random.Range(0, burstDelay);
+            _timeToNextShot = Random.Range(0, burstDelay);
             _firedInBurst = 0;
+        }
+
+        public void AllowFire(int delay)
+        {
+            _timeToNextShot = delay + Random.Range(0, _burstDelay);
+            enabled = true;
+        }
+
+        public void RestrictFire()
+        {
+            enabled = false;
         }
 
         private void Update()
         {
             _timeToNextShot -= Time.deltaTime;
+
+            // Avoid firing from the bottom and horizontaly
+            if (transform.position.y < -60)
+                return;
+            
             if (_timeToNextShot <= 0)
             {
                 FireToPlayer();

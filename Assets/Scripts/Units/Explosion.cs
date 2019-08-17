@@ -5,23 +5,24 @@ using Zenject;
 
 namespace Units
 {
-    [RequireComponent(typeof(Animation))]
+    [RequireComponent(typeof(Animator))]
     public class Explosion : MonoBehaviour
     {
+        
         private event Action<Explosion> Destroyed = _ => { };
         
-        [SerializeField] private Animation _animation;
-        [SerializeField] private AnimationClip _animationClip;
+        [SerializeField] private Animator _animator;
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private float _animationTime = 0.3f;
+        [SerializeField] private string _stateName = "";
         
         private void Setup(Vector2 position)
         {
             transform.position = position;
-            _animation.Rewind();
-            _animation.Play();
+            _animator.Play(_stateName);
             _audioSource.time = 0;
             _audioSource.Play();
-            Observable.Timer(TimeSpan.FromSeconds(_animationClip.length))
+            Observable.Timer(TimeSpan.FromSeconds(_animationTime))
                 .Subscribe(_ => Destroyed(this));
         }
         

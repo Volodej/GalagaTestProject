@@ -2,6 +2,7 @@ using System;
 
 namespace TopPlayers
 {
+    [Serializable]
     public class TopPlayerData
     {
         public string Name;

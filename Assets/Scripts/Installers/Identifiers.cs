@@ -8,5 +8,6 @@ namespace Installers
         public const string BossEnemy = "BossEnemy";
         public const string MothEnemy = "WaspEnemy";
         public const string EnemyExplosion = "EnemyExplosion";
+        public const string PlayerExplosion = "PlayerExplosion";
     }
 }

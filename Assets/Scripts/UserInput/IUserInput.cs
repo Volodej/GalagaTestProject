@@ -6,5 +6,7 @@ namespace UserInput
     {
         event Action Fired;
         event Action<float> Moved;
+        void Enable();
+        void Disable();
     }
 }

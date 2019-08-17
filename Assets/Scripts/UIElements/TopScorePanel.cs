@@ -23,15 +23,16 @@ namespace UIElements
             _newGameConfirmed = _newGameButton.OnClickAsObservable();
             _items = CreateItems();
         }
-        
+
         public void SetupPanel(List<TopPlayerData> players, int playersPosition)
         {
+            gameObject.SetActive(true);
             const int totalItemsCount = 10;
             for (int i = 0; i < totalItemsCount; i++)
             {
-                var data = players.Count < i ? players[i] : TopPlayerData.Empty;
+                var data = players.Count > i ? players[i] : TopPlayerData.Empty;
                 _items[i].SetData(data);
-                _items[i].IsHighlighted = i + 1 == playersPosition;
+                _items[i].IsHighlighted = i == playersPosition;
             }
         }
 

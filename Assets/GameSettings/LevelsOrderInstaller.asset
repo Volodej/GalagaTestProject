@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e55caa52916f47b48f1309105c842ac, type: 3}
+  m_Name: LevelsOrderInstaller
+  m_EditorClassIdentifier: 
+  _scenes:
+  - sceneAsset: {fileID: 102900000, guid: fce9b8b359ab74698af2dd771da3f180, type: 3}
+    scenePath: Assets/Scenes/Level1.unity
+  - sceneAsset: {fileID: 102900000, guid: 671a72b0e3bfb4cd1bf2ffd7dc204934, type: 3}
+    scenePath: Assets/Scenes/Level2.unity
+  - sceneAsset: {fileID: 102900000, guid: 5b5751a7f8b404c7281c5c3ca16aaf6d, type: 3}
+    scenePath: Assets/Scenes/Level3.unity
+  - sceneAsset: {fileID: 102900000, guid: c8b4f5b254cc7432fafc545f70a843de, type: 3}
+    scenePath: Assets/Scenes/Level4.unity
+  - sceneAsset: {fileID: 102900000, guid: 7315df591195244bd8eae892bdee088d, type: 3}
+    scenePath: Assets/Scenes/Level5.unity
+  _takeOnlyFirstScene: 0

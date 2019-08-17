@@ -24,28 +24,39 @@ namespace Units
         private PlayerShip _playerShip;
 
         private Projectile.Pool _projectilesPool;
+        private Explosion.Pool _explosionsPool;
         public IObservable<EnemyShip> DestroyedStream => _destroyedSubject;
         public bool IsAlive { get; private set; }
         public int PointsCont => _enemySettings.PointsForEnemy;
 
         [Inject]
-        public void Initialize(PlayerShip playerShip, [Inject(Id = Identifiers.EnemyProjectile)] Projectile.Pool projectilesPool)
+        public void Initialize(PlayerShip playerShip,
+            [Inject(Id = Identifiers.EnemyProjectile)]
+            Projectile.Pool projectilesPool,
+            [Inject(Id = Identifiers.EnemyExplosion)]
+            Explosion.Pool explosionsPool)
         {
             _playerShip = playerShip;
             _projectilesPool = projectilesPool;
+            _explosionsPool = explosionsPool;
             _damageable.GotHit += OnHit;
         }
 
         public Task StartAttack()
         {
-            return _enemyMover.DoMovement(GetRandomAttackQueue());
+            return StartMovement(GetRandomAttackQueue(), false);
         }
-        
-        public async Task StartMovement(MovementCommandsQueue lineMovementCommandsQueue)
+
+        public Task StartIncomingMovement(MovementCommandsQueue lineMovementCommandsQueue)
         {
-            _fireController.enabled = true;
+            return StartMovement(lineMovementCommandsQueue, true);
+        }
+
+        private async Task StartMovement(MovementCommandsQueue lineMovementCommandsQueue, bool delayFire)
+        {
+            _fireController.AllowFire(delayFire?3:0);
             await _enemyMover.DoMovement(lineMovementCommandsQueue);
-            _fireController.enabled = false;
+            _fireController.RestrictFire();
         }
 
         private void Setup(EnemySettings enemySettings, Transform formationCell, LevelSettings levelSettings)
@@ -60,7 +71,7 @@ namespace Units
             var shotsDelay = _enemySettings.ShotsDelay * levelSettings.FireRateMultiplier;
             _fireController.Setup(_playerShip.transform, _projectilesPool, shotsInBurst, burstDelay, shotsDelay,
                 _enemySettings.ProjectileSpeed);
-            
+
             IsAlive = true;
             gameObject.SetActive(true);
         }
@@ -73,8 +84,19 @@ namespace Units
         private void OnHit()
         {
             IsAlive = false;
+            _explosionsPool.Spawn(transform.position);
             _destroyedSubject.OnNext(this);
             Destroyed(this);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            var playerShip = other.GetComponent<PlayerShip>();
+            if (playerShip == null)
+                return;
+            
+            playerShip.GetComponent<Damageable>().Hit();
+            OnHit();
         }
 
         public class Pool : MonoMemoryPool<Transform, LevelSettings, EnemyShip>
@@ -86,7 +108,7 @@ namespace Units
             {
                 _enemySettings = enemySettings;
             }
-            
+
             protected override void Reinitialize(Transform formationCell, LevelSettings levelSettings, EnemyShip ship)
             {
                 ship.Setup(_enemySettings, formationCell, levelSettings);
@@ -94,12 +116,14 @@ namespace Units
 
             protected override void OnSpawned(EnemyShip ship)
             {
+                ship.transform.position = new Vector2(1000, 0);
                 ship.Destroyed += ReturnToPool;
                 base.OnSpawned(ship);
             }
 
             protected override void OnDespawned(EnemyShip ship)
             {
+                ship.transform.position = new Vector2(1000, 0);
                 ship.Destroyed -= ReturnToPool;
                 base.OnDespawned(ship);
             }

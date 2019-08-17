@@ -9,25 +9,18 @@ namespace LifeCycle.Game
         [SerializeField] private AudioClip _noRecord;
         [SerializeField] private AudioClip _newRecord;
         [SerializeField] private AudioClip _fighterDestroyed;
+        [SerializeField] private AudioClip _attackWave;
 
-        public void PlayNextLevel()
+        public void PlayNextLevel() => PlayClip(_nextLevel);
+        public void PlayNoRecord() => PlayClip(_noRecord);
+        public void PlayNewRecord() => PlayClip(_newRecord);
+        public void PlayFighterDestroyed() => PlayClip(_fighterDestroyed);
+        public void PlayAttackWave() => PlayClip(_attackWave);
+
+        private void PlayClip(AudioClip clip)
         {
-            _audioSource.clip = _nextLevel;
-            _audioSource.Play();
-        }
-        public void PlayNoRecord()
-        {
-            _audioSource.clip = _noRecord;
-            _audioSource.Play();
-        }
-        public void PlayNewRecord()
-        {
-            _audioSource.clip = _newRecord;
-            _audioSource.Play();
-        }
-        public void PlayFighterDestroyed()
-        {
-            _audioSource.clip = _fighterDestroyed;
+            _audioSource.clip = clip;
+            _audioSource.time = 0;
             _audioSource.Play();
         }
     }

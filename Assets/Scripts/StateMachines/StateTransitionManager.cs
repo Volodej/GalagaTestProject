@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using LifeCycle.Game.States;
+using UnityEngine;
 
 namespace StateMachines
 {
@@ -14,7 +15,13 @@ namespace StateMachines
 
         public IAwaitableState<TStateType> GetNextState(IAwaitableState<TStateType> currentState, TContext context)
         {
-            return _transitionHolders[currentState.Type].Transitions.First(transition => transition.CanSelectPredicate(context)).NextState;
+            var nextState = _transitionHolders[currentState.Type].Transitions
+                .First(transition => transition.CanSelectPredicate(context))
+                .NextState;
+            
+            Debug.Log($"({GetType().Name}); current: {currentState.Type}; next: {nextState.Type}\nContext: {context}");
+
+            return nextState;
         }
 
         protected HolderBuilder AddState(IAwaitableState<TStateType> state)

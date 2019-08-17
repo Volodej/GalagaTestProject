@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Actions:
   - Type: 1
-    Point: {x: 270, y: -20}
+    Point: {x: 270, y: 20}
   - Type: 2
     Point: {x: 0, y: 20}
   - Type: 1

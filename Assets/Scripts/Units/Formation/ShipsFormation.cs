@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LifeCycle.Game;
 using LifeCycle.Level;
 using Settings;
 using UniRx;
@@ -16,44 +17,39 @@ namespace Units.Formation
         private readonly Subject<EnemyShip> _enemyDestroyed = new Subject<EnemyShip>();
         private readonly List<EnemyShip> _enemies = new List<EnemyShip>();
 
-        private FormationSettings _formationSettings;
         private LevelSettings _levelSettings;
         private EnemiesSpawner _enemiesSpawner;
 
         private Bounds _centerBounds;
         private List<FormationCell> _formationCells;
-        private FormationExpander _formationExpander;
-        private FormationMover _formationMover;
         private Queue<IncomingWaveQueueItem> _incomingWaves;
+        private GameSoundController _soundController;
 
         public IObservable<int> PointsForEnemiesStream => _enemyDestroyed.Select(ship => ship.PointsCont);
         public IObservable<int> LeftEnemiesStream => _enemyDestroyed.Scan(_levelSettings.TotalEnemiesCount, (i, _) => --i);
         public int LeftIncomingWaves => _incomingWaves.Count;
 
         [Inject]
-        public void Initialize(FormationSettings formationSettings, LevelSettings levelSettings, EnemiesSpawner enemiesSpawner)
+        public void Initialize(FormationSettings formationSettings, LevelSettings levelSettings, EnemiesSpawner enemiesSpawner,
+            GameSoundController soundController)
         {
-            _formationSettings = formationSettings;
             _levelSettings = levelSettings;
             _enemiesSpawner = enemiesSpawner;
+            _soundController = soundController;
 
             var maxColumnsCount = levelSettings.EnemiesLines.Max(line => line.EnemiesInLine);
 
             (_formationCells, _incomingWaves) = BuildFormation(levelSettings.EnemiesLines, maxColumnsCount);
-            _formationExpander = FormationExpander.AttachTo(gameObject, formationSettings, _formationCells,
+            FormationExpander.AttachTo(gameObject, formationSettings, _formationCells,
                 levelSettings.EnemiesLines.Count, maxColumnsCount);
 
-            _formationMover = FormationMover.AttachTo(gameObject, formationSettings, levelSettings, levelSettings.EnemiesLines.Count,
+            FormationMover.AttachTo(gameObject, formationSettings, levelSettings, levelSettings.EnemiesLines.Count,
                 maxColumnsCount);
         }
 
         public async Task SpawnEnemiesWave()
         {
             var wave = _incomingWaves.Dequeue();
-            //var spawnedEnemies = _enemiesSpawner.Spawn(wave);
-            //_enemies.AddRange(spawnedEnemies);
-            //
-            Debug.Log($"SpawnEnemiesWave: i: {wave.Line.EnemiesInLine}; ");
 
             var allMovementTasks = new List<Task>(wave.CellsToReach.Count);
             foreach (var cell in wave.CellsToReach)
@@ -61,7 +57,7 @@ namespace Units.Formation
                 var enemy = _enemiesSpawner.Spawn(cell, wave.Line.EnemyType);
                 _enemies.Add(enemy);
                 enemy.DestroyedStream.Subscribe(_enemyDestroyed);
-                var movementTask = enemy.StartMovement(wave.Line.MovementCommandsQueue);
+                var movementTask = enemy.StartIncomingMovement(wave.Line.MovementCommandsQueue);
                 allMovementTasks.Add(movementTask);
                 await Task.Delay(TimeSpan.FromSeconds(wave.Line.TimeToSpawn / wave.Line.EnemiesInLine));
             }
@@ -78,10 +74,14 @@ namespace Units.Formation
             var allAttackTasks = new List<Task>(_levelSettings.ShipsInAttackWave);
             foreach (var attackShip in attackShips)
             {
+                if (!attackShip.IsAlive)
+                    continue;
+
+                _soundController.PlayAttackWave();
                 allAttackTasks.Add(attackShip.StartAttack());
                 await Task.Delay(TimeSpan.FromSeconds(_levelSettings.AttackWaveDelayTime));
             }
-            
+
             await Task.WhenAll(allAttackTasks);
         }
 

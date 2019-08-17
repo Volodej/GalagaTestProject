@@ -171,3 +171,4 @@ MonoBehaviour:
   _noRecord: {fileID: 8300000, guid: c4bb16fd032604f5bb4c6e77e07f6f27, type: 3}
   _newRecord: {fileID: 8300000, guid: 3f4d3d20e30774892a5e1fc18813ca22, type: 3}
   _fighterDestroyed: {fileID: 8300000, guid: 7b29a685aa1d54c7aa007ebb3e1e3a82, type: 3}
+  _attackWave: {fileID: 8300000, guid: 445a01f07f08a436fa0846ccb508732c, type: 3}

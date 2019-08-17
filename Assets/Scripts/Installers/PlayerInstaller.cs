@@ -16,7 +16,6 @@ namespace Installers
         public override void InstallBindings()
         {
             Container.Bind<PlayerShip>().FromComponentInNewPrefab(_playerPrefab).AsSingle();
-            Container.BindInstance(_playerExplosion);
 
 #if UNITY_EDITOR
             if (_enableKeyboardInputInEditor)
@@ -30,6 +29,15 @@ namespace Installers
                 .WithInitialSize(5)
                 .FromComponentInNewPrefab(_playerProjectile)
                 .UnderTransformGroup("Projectiles");
+            
+            
+            
+            Container.BindMemoryPool<Explosion, Explosion.Pool>()
+                .WithId(Identifiers.PlayerExplosion)
+                .WithInitialSize(1)
+                .FromComponentInNewPrefab(_playerExplosion)
+                .UnderTransformGroup("Explosions");
+            
         }
     }
 }

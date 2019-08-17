@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4231196466170301629}
   - component: {fileID: 4231196466170301630}
-  - component: {fileID: 4231196466170301631}
   - component: {fileID: 4640167543113730405}
   - component: {fileID: -2371239161883017491}
+  - component: {fileID: 8481415195259665732}
   m_Layer: 0
   m_Name: EnemyExplosion
   m_TagString: Untagged
@@ -84,21 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!111 &4231196466170301631
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4231196466170301624}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 48b776a407128433fab3f42b56430684, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &4640167543113730405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,9 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0d99be80c243d58973790cdf34f809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animation: {fileID: 4231196466170301631}
-  _animationClip: {fileID: 7400000, guid: 48b776a407128433fab3f42b56430684, type: 2}
+  _animator: {fileID: 8481415195259665732}
   _audioSource: {fileID: -2371239161883017491}
+  _animationTime: 0.483
+  _stateName: Explosion_Enemy
 --- !u!82 &-2371239161883017491
 AudioSource:
   m_ObjectHideFlags: 0
@@ -210,3 +196,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &8481415195259665732
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4231196466170301624}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2c2b793185a0a4498a0e79ae5db82a07, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

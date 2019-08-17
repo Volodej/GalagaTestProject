@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _formationSettings:
     AllowedFormationBounds:
-      m_Center: {x: 0, y: 0, z: 0}
+      m_Center: {x: 0, y: 60, z: 0}
       m_Extent: {x: 250, y: 100, z: 0}
     UnitSize: 20
     MinUnitsDistance: 10
     MaxUnitsDistance: 30
-    SqueezeExpandCycleTime: 10
+    SqueezeExpandCycleTime: 7
   _beeEnemy:
     Speed: 100
     RotationSpeed: 120
@@ -27,6 +27,8 @@ MonoBehaviour:
       type: 3}
     AttackCommandQueues:
     - {fileID: 11400000, guid: 0fe331a21c6f2449b9fdfbcbc6571573, type: 2}
+    - {fileID: 11400000, guid: a72991e57b7f249eb91dfaddcaf397f6, type: 2}
+    - {fileID: 11400000, guid: 881680085433544378f69a66d72c2f56, type: 2}
     ShotsInBurst: 1
     BurstDelay: 10
     ShotsDelay: 2
@@ -38,7 +40,10 @@ MonoBehaviour:
     Prefab: {fileID: 1382157333341367565, guid: 826efbe7c9fa042b8b9aca8c35644f8b,
       type: 3}
     AttackCommandQueues:
-    - {fileID: 11400000, guid: 0fe331a21c6f2449b9fdfbcbc6571573, type: 2}
+    - {fileID: 11400000, guid: 09da2d82b727c4030b39bdf8a5ef1f4e, type: 2}
+    - {fileID: 11400000, guid: 47188e89bc41d49438d582065ea8aa0d, type: 2}
+    - {fileID: 11400000, guid: 881680085433544378f69a66d72c2f56, type: 2}
+    - {fileID: 11400000, guid: a72991e57b7f249eb91dfaddcaf397f6, type: 2}
     ShotsInBurst: 2
     BurstDelay: 10
     ShotsDelay: 2
@@ -51,6 +56,8 @@ MonoBehaviour:
       type: 3}
     AttackCommandQueues:
     - {fileID: 11400000, guid: 0fe331a21c6f2449b9fdfbcbc6571573, type: 2}
+    - {fileID: 11400000, guid: 09da2d82b727c4030b39bdf8a5ef1f4e, type: 2}
+    - {fileID: 11400000, guid: 47188e89bc41d49438d582065ea8aa0d, type: 2}
     ShotsInBurst: 1
     BurstDelay: 7
     ShotsDelay: 2

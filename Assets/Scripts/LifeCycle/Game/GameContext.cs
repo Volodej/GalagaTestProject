@@ -7,15 +7,17 @@ namespace LifeCycle.Game
         public int PlayerScore { get; private set; }
         public int LevelNumber { get; set; }
         public int PlayerLives { get; private set; }
+        public int PlayerPositionInRating { get; private set; }
 
-        public void SetPlayerPosition(int ratingPosition)
+        public void SetPlayerPositionInRating(int ratingPosition)
         {
-            throw new System.NotImplementedException();
+            PlayerPositionInRating = ratingPosition;
         }
 
         public void TakeOneLife()
         {
-            throw new System.NotImplementedException();
+            PlayerLives--;
+            IsPlayerAlive = true;
         }
 
         public int AddScore(int points)
@@ -28,6 +30,19 @@ namespace LifeCycle.Game
             PlayerLives = 2;
             PlayerScore = 0;
             LevelNumber = 0;
+            NewLevelsAvailable = true;
+            PlayerPositionInRating = -1;
+        }
+
+        public override string ToString()
+        {
+            return $"{typeof(GameContext).FullName}\n" +
+                   $"\tIsPlayerAlive: {IsPlayerAlive}\n" +
+                   $"\tNewLevelsAvailable: {NewLevelsAvailable}\n" +
+                   $"\tPlayerScore: {PlayerScore}\n" +
+                   $"\tLevelNumber: {LevelNumber}\n" +
+                   $"\tPlayerLives: {PlayerLives}\n" +
+                   $"\tPlayerPositionInRating: {PlayerPositionInRating}";
         }
     }
 }

@@ -6,9 +6,9 @@ namespace Units.Formation
 {
     public class FormationMover : MonoBehaviour
     {
+        [SerializeField] private Bounds _centerBounds;
         private FormationSettings _formationSettings;
         private float _startTime;
-        private Bounds _centerBounds;
         private LevelSettings _levelSettings;
 
         public static FormationMover AttachTo(GameObject go, FormationSettings formationSettings, LevelSettings levelSettings,

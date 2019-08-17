@@ -6,6 +6,7 @@ namespace Units.Movement
         MoveToPoint,
         MoveToPlayer,
         MoveToFormation,
-        JoinFormation
+        JoinFormation,
+        GoOffscreen
     }
 }

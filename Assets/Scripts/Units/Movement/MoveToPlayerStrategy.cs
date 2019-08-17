@@ -15,6 +15,6 @@ namespace Units.Movement
         }
 
         protected override Vector2 GetPoint() => (Vector2) _player.position + _positionFromPlayer;
-        protected override float GetFinishDistance() => 20;
+        protected override float GetFinishDistance() => 40;
     }
 }
